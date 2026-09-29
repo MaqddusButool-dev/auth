@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { createObserveModule } from '@nestjs/observe';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
+import { ConfigModule } from '@nestjs/config';
 
 import { AuthModule } from './auth/auth.module.js';
-import { SupabaseModule } from './supabase/supabase.module.js';
+
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -19,8 +20,10 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     }),
    
     AuthModule,
-   
-    SupabaseModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+
   ],
   controllers: [AppController],
   providers: [AppService],
